@@ -11,13 +11,11 @@
     "lintfix": "prettier --write --list-different . && npm run lint -- --fix"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.58.0",
-    "@typescript-eslint/parser": "^5.58.0",
-    "@vue/eslint-config-prettier": "^7.1.0",
-    "@vue/eslint-config-typescript": "^11.0.2",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-nuxt": "^4.0.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^9.10.0",
     "nuxt": "3.3.3",
     "postcss-html": "^1.5.0",
     "postcss-scss": "^4.0.6",
