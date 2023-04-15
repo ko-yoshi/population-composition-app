@@ -7,13 +7,14 @@
   </div>
 </template>
 <script lang="ts">
-  type Props = { label: string; checked?: boolean }
+  type Props = { label: string; checked?: boolean; bgColor?: string }
   type Emits = { (e: 'change', val: boolean): void }
 </script>
 <script setup lang="ts">
   const props = withDefaults(defineProps<Props>(), {
     label: '',
     checked: false,
+    bgColor: '4287f5',
   })
   const emits = defineEmits<Emits>()
   const model = ref(props.checked)
@@ -40,10 +41,9 @@
       border-radius: 5px;
       transition: 0.2s;
 
-      &:hover,
       &.checked {
         color: #fff;
-        background-color: #4287f5;
+        background-color: v-bind("'' + props.bgColor");
       }
     }
   }
