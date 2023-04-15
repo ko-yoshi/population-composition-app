@@ -15,6 +15,7 @@ export type PopulationCompositions = {
 type PopulationComposition = {
   year: number
   value: number
+  rate?: number
 }
 
 export default defineEventHandler(async (e) => {
