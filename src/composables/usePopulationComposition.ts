@@ -1,19 +1,37 @@
-export const usePopulationComposition = () => {
-  const { state, setApiResults, setCheckedPrefectures } = useLineChartStore()
+import { ChartData } from 'chart.js'
 
-  // 後続処理振り分け
-  const updatePrefCode = (prefCode: number, prefName: string, val: boolean) => {
+export const usePopulationComposition = () => {
+  const {
+    state,
+    setApiResults,
+    setCheckedPrefectures,
+    setLineChartData,
+    setCheckedPopulationType,
+  } = useLineChartStore()
+
+  // 都道府県選択処理
+  const updatePrefCode = async (prefCode: number, prefName: string, val: boolean) => {
     // チェックオン時の処理
     if (val) {
       // ストアに人口構成情報があるか確認する
       if (!existApiResult(prefCode)) {
         // なければ人口構成取得API実施
-        apiPopulationComposition(prefCode)
+        await apiPopulationComposition(prefCode)
       }
     }
 
     // チェックオンオフ情報をストアに設定する
     setCheckedPrefectures(prefCode, prefName, val)
+
+    // LineChart用構造データをストアに設定する
+    setLineChartData(getLineChartData())
+  }
+
+  // 人口構成タイプ選択処理
+  const updatePopulationType = (code: (typeof POPULATION_CODE)[keyof typeof POPULATION_CODE]) => {
+    setCheckedPopulationType(code)
+    // LineChart用構造データをストアに設定する
+    setLineChartData(getLineChartData())
   }
 
   // 人口構成取得API実施
@@ -33,5 +51,45 @@ export const usePopulationComposition = () => {
     return prefCode in state.value.apiResults
   }
 
-  return { updatePrefCode }
+  // LineChart用データ構造取得処理
+  const getLineChartData = (): ChartData<'line'> => {
+    const labels = getAxisXLabel()
+    const datasets = getLineChartDataset()
+
+    return { labels, datasets }
+  }
+
+  // LineChart用 X軸ラベル取得処理
+  const getAxisXLabel = () => {
+    const type = state.value.checkedPopulationType
+    const results = state.value.apiResults
+    const keys = Object.keys(results).map(Number)
+
+    return keys.length ? results[keys[0]][type - 1].data.map((i) => i.year) : []
+  }
+
+  // LineChart用dataset取得処理
+  const getLineChartDataset = (): ChartData<'line'>['datasets'] => {
+    const type = state.value.checkedPopulationType
+    const results = state.value.apiResults
+    const prefs = state.value.checkedPrefectures
+    const prefCodes = Object.keys(prefs).map(Number)
+    return prefCodes.map((i) => {
+      const color = getColorCode(i)
+      return {
+        label: prefs[i],
+        data: results[i][type - 1].data.map((j) => j.value),
+        backgroundColor: color,
+        borderColor: color,
+      }
+    })
+  }
+
+  // カラーコード取得処理 都道県コードと特定キーで計算して決める
+  const getColorCode = (prefCode: number) => {
+    const color = ((prefCode * 0x147ad) | 0).toString(16)
+    return '#' + ('000000' + color).slice(-6)
+  }
+
+  return { updatePrefCode, updatePopulationType, getColorCode }
 }
