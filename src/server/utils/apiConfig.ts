@@ -12,5 +12,3 @@ export type BaseResponse<T> = {
   description?: string
   result?: T
 }
-
-export const getParamsFromPath = () => {}
