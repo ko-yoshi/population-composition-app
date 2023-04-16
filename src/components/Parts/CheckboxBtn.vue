@@ -2,7 +2,7 @@
   <div class="checkbox-btn">
     <label :class="{ checked: model }">
       <input v-model="model" type="checkbox" @change="emits('change', model)" />
-      {{ props.label }}
+      {{ label }}
     </label>
   </div>
 </template>
@@ -14,7 +14,7 @@
   const props = withDefaults(defineProps<Props>(), {
     label: '',
     checked: false,
-    bgColor: '4287f5',
+    bgColor: '#4287f5',
   })
   const emits = defineEmits<Emits>()
   const model = ref(props.checked)
