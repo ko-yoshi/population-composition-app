@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils'
-import { render } from 'nuxt/dist/app/compat/capi'
 import { expect, test, describe, vi } from 'vitest'
 import PrefecturesArea from '~/components/Objects/PrefecturesArea.vue'
 
