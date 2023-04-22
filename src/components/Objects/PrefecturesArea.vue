@@ -10,12 +10,15 @@
           @change="updatePrefCode(i.prefCode, i.prefName, $event)"
         />
       </template>
+      <template v-if="prefectures.message">
+        <p>データを取得できませんでした</p>
+      </template>
     </template>
   </fieldset>
 </template>
 <script setup lang="ts">
-  const { data: prefectures } = await useFetch('/api/prefectures')
   const { updatePrefCode, getColorCode } = usePopulationComposition()
+  const { data: prefectures } = await useFetch('/api/prefectures')
 </script>
 <style lang="scss" scoped>
   .prefectures {

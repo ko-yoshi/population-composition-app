@@ -2,7 +2,7 @@ import { apiBaseUrl, apiHeaders, BaseResponse } from '~/server/utils/apiConfig'
 
 const path = '/prefectures'
 
-type PrefecturesResult = {
+export type PrefecturesResult = {
   prefCode: number
   prefName: string
 }

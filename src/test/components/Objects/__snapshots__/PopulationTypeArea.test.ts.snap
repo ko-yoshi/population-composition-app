@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PopulationTypeArea > snapshot 1`] = `
+"<fieldset data-v-b7f3fcd7=\\"\\" class=\\"populations\\">
+  <legend data-v-b7f3fcd7=\\"\\">グラフに表示する人口構成タイプを選択してください</legend><label data-v-63b2aec9=\\"\\" data-v-b7f3fcd7=\\"\\" class=\\"radio-btn item\\"><input data-v-63b2aec9=\\"\\" type=\\"radio\\" name=\\"radio\\"> 総人口</label><label data-v-63b2aec9=\\"\\" data-v-b7f3fcd7=\\"\\" class=\\"radio-btn item\\"><input data-v-63b2aec9=\\"\\" type=\\"radio\\" name=\\"radio\\"> 年少人口</label><label data-v-63b2aec9=\\"\\" data-v-b7f3fcd7=\\"\\" class=\\"radio-btn item\\"><input data-v-63b2aec9=\\"\\" type=\\"radio\\" name=\\"radio\\"> 生産年齢人口</label><label data-v-63b2aec9=\\"\\" data-v-b7f3fcd7=\\"\\" class=\\"radio-btn item\\"><input data-v-63b2aec9=\\"\\" type=\\"radio\\" name=\\"radio\\"> 老年人口</label>
+</fieldset>"
+`;

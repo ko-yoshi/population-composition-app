@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PartsCheckboxBtn > snapshot 1`] = `"<div data-v-6e17ff53=\\"\\" class=\\"checkbox-btn\\"><label data-v-6e17ff53=\\"\\" class=\\"\\"><input data-v-6e17ff53=\\"\\" type=\\"checkbox\\"> テスト2</label></div>"`;

@@ -1,7 +1,5 @@
 <template>
-  <template v-if="chartData">
-    <Line class="contents" :options="options" :data="chartData" />
-  </template>
+  <Line class="contents" :options="options" :data="chartData" />
 </template>
 
 <script lang="ts">

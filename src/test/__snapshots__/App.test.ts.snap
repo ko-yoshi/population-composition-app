@@ -1,0 +1,18 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`App.vue > snapshot 1`] = `
+"<main data-v-37ddea6c=\\"\\" class=\\"main\\">
+  <section data-v-37ddea6c=\\"\\" class=\\"header\\">
+    <h1 data-v-37ddea6c=\\"\\">都道府県別人口推移グラフ</h1>
+  </section>
+  <section data-v-37ddea6c=\\"\\">
+    <prefectures-area-stub data-v-37ddea6c=\\"\\"></prefectures-area-stub>
+  </section>
+  <section data-v-37ddea6c=\\"\\" class=\\"population-type-area\\">
+    <population-type-area-stub data-v-37ddea6c=\\"\\"></population-type-area-stub>
+  </section>
+  <section data-v-37ddea6c=\\"\\" class=\\"line-chart-area\\">
+    <line-chart-stub data-v-37ddea6c=\\"\\"></line-chart-stub>
+  </section>
+</main>"
+`;

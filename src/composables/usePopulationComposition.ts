@@ -9,7 +9,12 @@ export const usePopulationComposition = () => {
     setCheckedPopulationType,
   } = useLineChartStore()
 
-  // 都道府県選択処理
+  /**
+   * 都道府県チェックボックスクリック時
+   * @param prefCode 都道府県コード
+   * @param prefName 都道府県名
+   * @param val チェックボックスの値
+   */
   const updatePrefCode = async (prefCode: number, prefName: string, val: boolean) => {
     // チェックオン時の処理
     if (val) {
@@ -27,14 +32,20 @@ export const usePopulationComposition = () => {
     setLineChartData(getLineChartData())
   }
 
-  // 人口構成タイプ選択処理
+  /**
+   * 人口構成タイプボタンクリック時
+   * @param code 人口構成タイプコード
+   */
   const updatePopulationType = (code: (typeof POPULATION_CODE)[keyof typeof POPULATION_CODE]) => {
     setCheckedPopulationType(code)
     // LineChart用構造データをストアに設定する
     setLineChartData(getLineChartData())
   }
 
-  // 人口構成取得API実施
+  /**
+   * 人口構成取得API実施
+   * @param prefCode 都道府県コード
+   */
   const apiPopulationComposition = async (prefCode: number) => {
     const { data: res } = await useFetch('/api/population/composition/perYear', {
       params: { cityCode: '-', prefCode },
@@ -46,12 +57,17 @@ export const usePopulationComposition = () => {
     }
   }
 
-  // 既に人口構成取得APIを実施している都道府県か確認する
+  /**
+   * 既に人口構成取得APIを実施している都道府県か確認する
+   * @param prefCode 都道府県コード
+   */
   const existApiResult = (prefCode: number) => {
     return prefCode in state.value.apiResults
   }
 
-  // LineChart用データ構造取得処理
+  /**
+   * 折れ線グラフ用データ構造を取得する
+   */
   const getLineChartData = (): ChartData<'line'> => {
     const labels = getAxisXLabel()
     const datasets = getLineChartDataset()
@@ -59,7 +75,9 @@ export const usePopulationComposition = () => {
     return { labels, datasets }
   }
 
-  // LineChart用 X軸ラベル取得処理
+  /**
+   * 折れ線グラフ用X軸ラベルを取得する
+   */
   const getAxisXLabel = () => {
     const type = state.value.checkedPopulationType
     const results = state.value.apiResults
@@ -68,7 +86,9 @@ export const usePopulationComposition = () => {
     return keys.length ? results[keys[0]][type - 1].data.map((i) => i.year) : []
   }
 
-  // LineChart用dataset取得処理
+  /**
+   * 折れ線グラフ用の実データを取得する
+   */
   const getLineChartDataset = (): ChartData<'line'>['datasets'] => {
     const type = state.value.checkedPopulationType
     const results = state.value.apiResults
@@ -85,7 +105,10 @@ export const usePopulationComposition = () => {
     })
   }
 
-  // カラーコード取得処理 都道県コードと特定キーで計算して決める
+  /**
+   * カラーコード取得処理 都道県コードと特定キーで計算して決める
+   * @param prefCode 都道府県コード
+   */
   const getColorCode = (prefCode: number) => {
     const color = ((prefCode * 0x147ad) | 0).toString(16)
     return '#' + ('000000' + color).slice(-6)
